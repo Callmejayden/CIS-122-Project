@@ -9,20 +9,22 @@ public class FirstPersonControll : MonoBehaviour
 {
     public bool CanMove { get; private set; } = true;
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
+    private bool shouldJump => Input.GetKeyDown(jumpKey) && characterController.isGrounded;
 
     [Header("Functional Options")]
     [SerializeField] private bool canInteract = true;
-    [SerializeField] private bool canSprint = true; 
+    [SerializeField] private bool canSprint = true;
+    [SerializeField] private bool canJump = true;
 
     [Header("Controls")]
     [SerializeField] private KeyCode InteractKey = KeyCode.Mouse0;
-    [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift; 
+    [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift;
+    [SerializeField] private KeyCode jumpKey = KeyCode.Space;
 
     // Speed and gravity
     [Header("Movement Parameters")]
     [SerializeField] private float walkSpeed = 3.0f;
     [SerializeField] private float sprintSpeed = 6.0f;
-    [SerializeField] private float gravity = 30.0f;
     
 
     // Look speed of the x and y and the limits of how far you can look
@@ -31,6 +33,10 @@ public class FirstPersonControll : MonoBehaviour
     [SerializeField, Range(1, 10)] private float lookSpeedY = 2.0f;
     [SerializeField, Range(1, 180)] private float upperLookLimit = 80.0f;
     [SerializeField, Range(1, 180)] private float lowerLookLimit = 80.0f;
+
+    [Header("Jump Parameters")]
+    [SerializeField] private float jumpForce = 8.0f;
+    [SerializeField] private float gravity = 30.0f;
 
     //Setting Interaction Distance, Layer, etc
     [Header("Interaction")]
@@ -113,6 +119,9 @@ public class FirstPersonControll : MonoBehaviour
             HandleMovementInput();
             HandleMouseLook();
 
+            if (canJump)
+                HandleJump();
+
             ApplyFinalMovements();
 
             if (canInteract)
@@ -144,6 +153,14 @@ public class FirstPersonControll : MonoBehaviour
         playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeedX, 0);
 
+    }
+
+    private void HandleJump()
+    {
+        if (shouldJump)
+            moveDirection.y = jumpForce;
+            
+        
     }
   
     private void ApplyFinalMovements()
