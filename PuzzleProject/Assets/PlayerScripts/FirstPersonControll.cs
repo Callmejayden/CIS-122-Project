@@ -8,17 +8,20 @@ using UnityEngine;
 public class FirstPersonControll : MonoBehaviour
 {
     public bool CanMove { get; private set; } = true;
-
+    private bool isSprinting => canSprint && Input.GetKey(sprintKey);
 
     [Header("Functional Options")]
     [SerializeField] private bool canInteract = true;
+    [SerializeField] private bool canSprint = true; 
 
     [Header("Controls")]
     [SerializeField] private KeyCode InteractKey = KeyCode.Mouse0;
+    [SerializeField] private KeyCode sprintKey = KeyCode.LeftShift; 
 
     // Speed and gravity
     [Header("Movement Parameters")]
     [SerializeField] private float walkSpeed = 3.0f;
+    [SerializeField] private float sprintSpeed = 6.0f;
     [SerializeField] private float gravity = 30.0f;
     
 
@@ -125,7 +128,7 @@ public class FirstPersonControll : MonoBehaviour
     // walk speed/input 
     private void HandleMovementInput()
     {
-        currentInput = new Vector2(walkSpeed * Input.GetAxis("Vertical"), walkSpeed * Input.GetAxis("Horizontal"));
+        currentInput = new Vector2((isSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Vertical"), (isSprinting ? sprintSpeed : walkSpeed) * Input.GetAxis("Horizontal"));
 
         float moveDirectionY = moveDirection.y;
         moveDirection = (transform.TransformDirection(Vector3.forward) * currentInput.x) + (transform.TransformDirection(Vector3.right) * currentInput.y);
