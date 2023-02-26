@@ -54,6 +54,8 @@ public class FirstPersonControll : MonoBehaviour
 
     private float rotationX = 0;
 
+    public static FirstPersonControll instance;
+
     //Methods
 
     //Check if is looking
