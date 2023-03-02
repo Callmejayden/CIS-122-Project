@@ -56,8 +56,6 @@ ExportedObj/
 *.pdb.meta
 *.mdb.meta
 *.tga.meta
-*.tga
-*.mat
 *.mat.meta
 *.meta
 
