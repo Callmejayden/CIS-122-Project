@@ -28,6 +28,10 @@ public class PortalGun : MonoBehaviour
             Vector3 hitPos = rayHit.point;
 
             A.transform.position = hitPos;
+
+            GameObject hit = rayHit.transform.gameObject;
+
+            A.transform.rotation = hit.transform.rotation;
         }
     }
 
@@ -39,6 +43,12 @@ public class PortalGun : MonoBehaviour
             Vector3 hitPos = rayHit.point;
 
             B.transform.position = hitPos;
+
+            GameObject hit = rayHit.transform.gameObject;
+
+            B.transform.rotation = hit.transform.rotation;
+
+            
         }
 
     }

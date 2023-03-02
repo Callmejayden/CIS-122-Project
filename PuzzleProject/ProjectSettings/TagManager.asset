@@ -3,12 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Portal A
+  - Portal B
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PortalGunLayer
   - Water
   - UI
   - 
