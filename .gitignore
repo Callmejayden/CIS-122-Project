@@ -57,8 +57,8 @@ ExportedObj/
 *.mdb.meta
 *.tga.meta
 *.tga
-*.met
-*.met.meta
+*.mat
+*.mat.meta
 *.meta
 
 # Unity3D generated file on crash reports
