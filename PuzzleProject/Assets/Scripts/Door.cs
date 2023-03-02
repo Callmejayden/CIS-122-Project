@@ -14,10 +14,13 @@ public class Door : IInteract
     }
     public override void OnInteract()
     {
+        print("Interacted with " + gameObject.name);
         if (canBeInteractedWith)
         {
             //toggles from true to false
-            isOpen = !isOpen;
+            isOpen =! isOpen;
+
+            print("Open " + gameObject.name);
 
             Vector3 doorTransformDirection = transform.TransformDirection(Vector3.forward);
             Vector3 playerTransformDirection = FirstPersonControll.instance.transform.position - transform.position;
