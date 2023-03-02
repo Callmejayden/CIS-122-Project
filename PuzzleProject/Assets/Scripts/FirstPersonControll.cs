@@ -116,6 +116,7 @@ public class FirstPersonControll : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;

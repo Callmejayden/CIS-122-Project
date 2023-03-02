@@ -23,8 +23,16 @@ public class Door : IInteract
             print("Open " + gameObject.name);
 
             Vector3 doorTransformDirection = transform.TransformDirection(Vector3.forward);
+
+            print("Door Transform Direction Set");
+
             Vector3 playerTransformDirection = FirstPersonControll.instance.transform.position - transform.position;
+
+            print("Player Transform Direction Set");
+
             float dot = Vector3.Dot(doorTransformDirection, playerTransformDirection);
+
+            print("dot is" + dot);
 
             anim.SetFloat("dot",dot);
             anim.SetBool("isOpen", isOpen);
