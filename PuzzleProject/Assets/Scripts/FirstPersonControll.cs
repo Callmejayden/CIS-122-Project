@@ -1,12 +1,24 @@
 // Koldyn Korpal
 // 2/19/22
 
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FirstPersonControll : MonoBehaviour
 {
+    
+
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+    public float jumpHeight = 3f;
+    
+    Vector3 velocity;
+    bool isGrounded;
+
     public bool CanMove { get; private set; } = true;
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
     private bool shouldJump => Input.GetKeyDown(jumpKey) && characterController.isGrounded;
