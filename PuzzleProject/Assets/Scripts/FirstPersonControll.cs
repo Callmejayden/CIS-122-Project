@@ -106,7 +106,6 @@ public class FirstPersonControll : MonoBehaviour
     {
         if (Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDistance))
         {
-            //8:00 in video add new layer top right inspector : "IInteract" at number 9
             //if on layer 9                      AND dont have current interactable OR if the object I am looking at is not equal to the current interactable
             if (hit.collider.gameObject.layer == 9 && (currentInteractable == null || hit.collider.gameObject.GetInstanceID() != currentInteractable.GetInstanceID()))
             {
@@ -130,7 +129,7 @@ public class FirstPersonControll : MonoBehaviour
     //When Pressing Interact Button
     private void HandleInteractionInput()
     {
-        // if interact key is pressed  and  there is something to interact with  and  Create Ray at center of screen with interaction distance  and  is on the interact Layer
+        // if interact key is pressed AND there is something to interact with AND Create Ray at center of screen with interaction distance AND is on the interact Layer
         if (Input.GetKeyDown(InteractKey) && currentInteractable != null && Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDistance, interactionLayer))
         {
             currentInteractable.OnInteract();
@@ -139,10 +138,6 @@ public class FirstPersonControll : MonoBehaviour
 
 
         }
-
-
-
-        //12:30 for application
 
     }
 
