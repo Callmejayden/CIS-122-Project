@@ -1,12 +1,24 @@
 // Koldyn Korpal
 // 2/19/22
 
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FirstPersonControll : MonoBehaviour
 {
+    
+
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
+    public float jumpHeight = 3f;
+    
+    Vector3 velocity;
+    bool isGrounded;
+
     public bool CanMove { get; private set; } = true;
     private bool isSprinting => canSprint && Input.GetKey(sprintKey);
     private bool shouldJump => Input.GetKeyDown(jumpKey) && characterController.isGrounded;
@@ -17,6 +29,7 @@ public class FirstPersonControll : MonoBehaviour
     [SerializeField] private bool canSprint = true;
     [SerializeField] private bool canJump = true;
     [SerializeField] private bool canCrouch = true;
+    [SerializeField] private bool WillSlideSlopes = true;
 
     [Header("Controls")]
     [SerializeField] private KeyCode InteractKey = KeyCode.Mouse0;
@@ -28,6 +41,7 @@ public class FirstPersonControll : MonoBehaviour
     [Header("Movement Parameters")]
     [SerializeField] private float walkSpeed = 3.0f;
     [SerializeField] private float sprintSpeed = 6.0f;
+    [SerializeField] private float slopeSpeed = 8f;
 
     // Look speed of the x and y and the limits of how far you can look
     [Header("Look Parameters")]
@@ -47,7 +61,25 @@ public class FirstPersonControll : MonoBehaviour
     [SerializeField] private Vector3 crouchingCenter = new Vector3(0,0.5f,0);
     [SerializeField] private Vector3 standingCenter = new Vector3(0, 0, 0);
     private bool isCrouching;
-    private bool duringCrouchAnimation; 
+    private bool duringCrouchAnimation;
+
+    // Sliding Parameters
+    private Vector3 hitPointNormal;
+    private bool IsSliding
+    {
+        get
+        {
+            if(characterController.isGrounded && Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, 2f))
+            {
+                hitPointNormal = slopeHit.normal;
+                return Vector3.Angle(hitPointNormal, Vector3.up) > characterController.slopeLimit;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
 
     //Setting Interaction Distance, Layer, etc
     [Header("Interaction")]
@@ -190,6 +222,9 @@ public class FirstPersonControll : MonoBehaviour
     {
         if(!characterController.isGrounded)
             moveDirection.y -= gravity * Time.deltaTime;
+
+        if (WillSlideSlopes && IsSliding)
+            moveDirection += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z) * slopeSpeed;
 
         characterController.Move(moveDirection * Time.deltaTime);
     }

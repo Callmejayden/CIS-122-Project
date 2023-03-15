@@ -25,13 +25,16 @@ public class PortalGun : MonoBehaviour
         RaycastHit rayHit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit))
         {
-            Vector3 hitPos = rayHit.point;
+            if (rayHit.transform.gameObject.tag != "Portal B")
+            {
+                Vector3 hitPos = rayHit.point;
 
-            A.transform.position = hitPos;
+                A.transform.position = hitPos;
 
-            GameObject hit = rayHit.transform.gameObject;
+                GameObject hit = rayHit.transform.gameObject;
 
-            A.transform.rotation = hit.transform.rotation;
+                A.transform.rotation = hit.transform.rotation;
+            }
         }
     }
 
@@ -40,14 +43,17 @@ public class PortalGun : MonoBehaviour
         RaycastHit rayHit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit))
         {
-            Vector3 hitPos = rayHit.point;
 
-            B.transform.position = hitPos;
+            if (rayHit.transform.gameObject.tag != "Portal A")
+            {
+                Vector3 hitPos = rayHit.point;
 
-            GameObject hit = rayHit.transform.gameObject;
+                B.transform.position = hitPos;
 
-            B.transform.rotation = hit.transform.rotation;
+                GameObject hit = rayHit.transform.gameObject;
 
+                B.transform.rotation = hit.transform.rotation;
+            }
             
         }
 

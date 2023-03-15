@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 59644482}
   - component: {fileID: 59644481}
   - component: {fileID: 59644480}
+  - component: {fileID: 59644483}
   m_Layer: 0
   m_Name: Portal A
   m_TagString: Portal A
@@ -307,6 +308,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!65 &59644483
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59644478}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000005, y: 2.0000007, z: 1.0000002}
+  m_Center: {x: 0.000000059604666, y: 0, z: -0.00000008940697}
 --- !u!1 &79846283
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,8 +542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8119a9aa627bc40941b5a00916e6bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  APos: {fileID: 59644482}
-  BPos: {fileID: 1407782857}
+  APos: {fileID: 240195999}
+  BPos: {fileID: 711022188}
 --- !u!114 &408660647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3578,6 +3592,7 @@ GameObject:
   - component: {fileID: 1407782857}
   - component: {fileID: 1407782856}
   - component: {fileID: 1407782855}
+  - component: {fileID: 1407782858}
   m_Layer: 0
   m_Name: Portal B
   m_TagString: Portal B
@@ -3653,6 +3668,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!65 &1407782858
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407782854}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000002, y: 2.0000007, z: 1.0000001}
+  m_Center: {x: 0.00000005960465, y: 5.421011e-20, z: -0.00000008940696}
 --- !u!20 &1444643643 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6977958353611340878, guid: 03ba3418b2c8bb24889c76a1650edf1f, type: 3}
