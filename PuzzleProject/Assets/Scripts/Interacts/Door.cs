@@ -52,8 +52,9 @@ public class Door : IInteract
 
     public override void OnInteract()
     {
+
         //if door is unlocked
-        if (IsLocked == false)
+        if (IsLocked == false | isOpen == true)
         {
             print("Interacted with " + gameObject.name);
             //if not currently in animation

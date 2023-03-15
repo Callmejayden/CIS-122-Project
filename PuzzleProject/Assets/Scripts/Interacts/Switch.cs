@@ -12,12 +12,12 @@ public class Switch : IInteract
     [SerializeField] private Material offMaterial;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private Door myDoor;
-    [SerializeField] private Material myMaterial;
+
     private void Start()
     {
         audioSource = this.GetComponent<AudioSource>();
 
-        myMaterial = this.GetComponent<Material>();
+
     }
 
     public void Toggle(Door door)
@@ -29,7 +29,7 @@ public class Switch : IInteract
 
         ToggleColor(isOn);
 
-        //audioSource.Play();
+        audioSource.Play();
 
         //If lever is on, door is unlocked 
         door.ToggleLock();
