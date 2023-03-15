@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Switch : IInteract
+public class Button : IInteract
 {
     [SerializeField] private bool isOn = false;
     public bool IsOn //Only get for other scripts
@@ -12,11 +12,12 @@ public class Switch : IInteract
     [SerializeField] private Material offMaterial;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private Door myDoor;
+    [SerializeField] private Material myMaterial;
     private void Start()
     {
         audioSource = this.GetComponent<AudioSource>();
-        
 
+        myMaterial = this.GetComponent<Material>();
     }
 
     public void Toggle(Door door)
