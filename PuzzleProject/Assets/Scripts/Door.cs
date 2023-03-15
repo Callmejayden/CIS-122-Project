@@ -7,6 +7,12 @@ public class Door : IInteract
     private bool isOpen = false;
     private bool canBeInteractedWith = true;
     private Animator anim;
+    private bool isLocked = false;
+    public bool IsLocked
+    {
+        get { return this.isLocked; }
+        set { this.isLocked = value; }
+    }
 
     private void Start()
     {
@@ -14,29 +20,36 @@ public class Door : IInteract
     }
     public override void OnInteract()
     {
-        print("Interacted with " + gameObject.name);
-        if (canBeInteractedWith)
+        if (IsLocked == false)
         {
-            //toggles from true to false
-            isOpen =! isOpen;
+            print("Interacted with " + gameObject.name);
+            if (canBeInteractedWith)
+            {
+                //toggles from true to false
+                isOpen = !isOpen;
 
-            print("Open " + gameObject.name);
+                print("Open " + gameObject.name);
 
-            Vector3 doorTransformDirection = transform.TransformDirection(Vector3.forward);
+                Vector3 doorTransformDirection = transform.TransformDirection(Vector3.forward);
 
-            print("Door Transform Direction Set");
+                print("Door Transform Direction Set");
 
-            Vector3 playerTransformDirection = FirstPersonControll.instance.transform.position - transform.position;
+                Vector3 playerTransformDirection = FirstPersonControll.instance.transform.position - transform.position;
 
-            print("Player Transform Direction Set");
+                print("Player Transform Direction Set");
 
-            float dot = Vector3.Dot(doorTransformDirection, playerTransformDirection);
+                float dot = Vector3.Dot(doorTransformDirection, playerTransformDirection);
 
-            print("dot is" + dot);
+                print("dot is" + dot);
 
-            anim.SetFloat("dot",dot);
-            anim.SetBool("isOpen", isOpen);
+                anim.SetFloat("dot", dot);
+                anim.SetBool("isOpen", isOpen);
 
+            }
+        }
+        else
+        {
+            print("Door is locked");
         }
     }
     
